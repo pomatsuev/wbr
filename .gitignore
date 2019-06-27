@@ -1,0 +1,6 @@
+public/build/
+node_modules/
+package-lock.json
+js/
+css/
+public/*.html
