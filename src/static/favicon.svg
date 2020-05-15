@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 4.960937 4.960937"
+   height="4.960937mm"
+   width="4.960937mm">
+  <defs
+     id="defs2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     style="display:inline"
+     transform="translate(-19.394903,-81.459081)"
+     id="layer1">
+    <g
+       transform="translate(0,-2.980975)"
+       id="text817-3"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;line-height:1.25;font-family:'Nexa Bold';-inkscape-font-specification:'Nexa Bold, ';letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       aria-label="WBR">
+      <rect
+         y="84.440056"
+         x="19.394903"
+         height="4.960937"
+         width="4.960937"
+         id="rect848"
+         style="display:none;fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:0.05765064;stroke-opacity:1" />
+      <path
+         id="path837"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Nexa Bold';-inkscape-font-specification:'Nexa Bold, ';stroke-width:0.26458332"
+         d="m 22.149541,85.513338 -0.556008,-0.0059 -0.719667,2.137833 -0.6985,-2.137833 h -0.626533 l 1.087966,2.963333 h 0.490838 z" />
+      <path
+         id="path839"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Nexa Bold';-inkscape-font-specification:'Nexa Bold, ';stroke-width:0.26458332"
+         d="m 22.143866,87.188068 h 0.855133 c 0.2286,0 0.554567,0.1397 0.554567,0.4064 0,0.2794 -0.325967,0.3556 -0.554567,0.3556 h -0.855133 z m 0.0057,-1.67473 0.357777,0.508003 0.491698,-0.0059 c 0.355575,-0.0043 0.465667,0.2286 0.465667,0.364067 0,0.169333 -0.1143,0.3175 -0.465667,0.3175 l -0.677262,0.0064 -0.443288,-0.609682 0.131409,-0.572206 z m 0.849475,-0.0059 h -0.41991 l -0.991165,2.965063 1.411075,-0.0017 c 0.613833,-7.42e-4 1.109134,-0.211666 1.109134,-0.872066 0,-0.186267 -0.127,-0.554567 -0.474134,-0.6604 0.275167,-0.122767 0.444293,-0.354712 0.444293,-0.583312 0,-0.5969 -0.495093,-0.847555 -1.079293,-0.847555 z" />
+    </g>
+  </g>
+</svg>

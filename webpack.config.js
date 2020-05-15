@@ -1,103 +1,104 @@
-const DEVELOPMENT          = 'development';
+const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
+const onDevMode = process.env.NODE_ENV === 'development';
+console.log('Development mode:', onDevMode);
 
-const miniCssExtractPlugin = require('mini-css-extract-plugin');
-const path                 = require('path');
-const webpack              = require('webpack');
-const HtmlWebpackPlugin    = require('html-webpack-plugin');
+function getMiniCSSloaderOptions() {
+  return {
+    loader: MiniCSSExtractPlugin.loader,
+    options: {
+      hmr: onDevMode,
+      reloadAll: true,
+    },
+  };
+}
 
-const NODE_ENV = (process.env.NODE_ENV && 
-                  process.env.NODE_ENV.trim()) || DEVELOPMENT;
-
-let settings = {
-  devtool: false,
+module.exports = {
+  context: path.resolve(__dirname, 'src'),
+  mode: 'development',
+  devtool: onDevMode ? 'source-map' : '',
   entry: {
-    bundle: './src/index.js',
+    bundle: ['@babel/polyfill', './index.js'],
   },
   output: {
-    path: path.join(__dirname, 'public'),
-    filename: NODE_ENV === DEVELOPMENT ? 'js/[name]-[hash:5].js' : 'js/[name]-[contenthash:5].js',
+    filename: '[name].[hash:5].js',
+    path: path.resolve(__dirname, 'dist'),
   },
-  resolve:{
-    extensions: [
-      '.js', '.jsx', '.css', '.scss', '.sass'
-    ]
+  resolve: {
+    extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
   },
+  plugins: [
+    new HTMLWebpackPlugin({
+      template: './index.html',
+      inject: 'body',
+    }),
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, 'src/static'),
+        to: path.resolve(__dirname, 'dist'),
+      },
+    ]),
+    new MiniCSSExtractPlugin({
+      filename: '[name].[hash:5].css',
+    }),
+  ],
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
-        test: /\.(sa|sc|c)ss$/,
-        exclude: /node_modules/,
+        test: /\.css$/,
+        use: [getMiniCSSloaderOptions(), 'css-loader'],
+      },
+      {
+        test: /\.s(a|c)ss$/,
         use: [
-          'style-loader',
-          miniCssExtractPlugin.loader,
+          getMiniCSSloaderOptions(),
           'css-loader',
-          'postcss-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: path.resolve(__dirname),
+              },
+            },
+          },
           'sass-loader',
-        ]
+        ],
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name(file) {
-                if(NODE_ENV === DEVELOPMENT) {
-                  return '[name]-[hash:5].[ext]';
-                } else {
-                  return '[name]-[contenthash:5].[ext]';
-                }
-              }
-            }
-          }
-        ]
-      }
-    ]
+        test: /\.(png|svg|jpg|jpeg|ico|gif|ttf|woff|woff2|eot)$/,
+        loader: 'file-loader',
+      },
+    ],
   },
-  plugins: [
-    new miniCssExtractPlugin({
-      filename: NODE_ENV === DEVELOPMENT ? 'css/style-[hash:5].css' : 'css/style-[contenthash:5].css',
-    }),
-    new webpack.DefinePlugin({
-      NODE_ENV: JSON.stringify(NODE_ENV)
-    }),
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      inject: 'body'
-    }),
-  ],
   optimization: {
     splitChunks: {
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendor',
-          chunks: 'initial',          
+          chunks: 'initial',
         },
-        dynamicVendor:{
+        dynamicVendor: {
           name: 'async.vendor',
-          chunks: 'async',          
-        }
-      }
-    }
+          chunks: 'async',
+        },
+      },
+    },
   },
-  devServer:{
-    contentBase: path.join(__dirname, 'public'),
-    compress: true,
-    port: 9000
-  }
-}
-
-module.exports = (_env, argv) => {  
-  if(argv.mode === DEVELOPMENT){
-    settings.devtool = "source-map";
-  }
-  console.log('Webpack run with NODE_ENV =', argv.mode === NODE_ENV ? NODE_ENV : argv.mode);
-  return settings;
-}
+  devServer: {
+    port: 3000,
+    hot: onDevMode,
+  },
+};

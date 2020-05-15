@@ -1,6 +1,3 @@
-public/build/
+dist/
 node_modules/
 package-lock.json
-js/
-css/
-public/*.html
